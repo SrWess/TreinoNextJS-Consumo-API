@@ -4,9 +4,10 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  position: fixed;
+  position: sticky;
   width: 100%;
   padding: 1.2rem;
+  height: 5.3rem;
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.09);
 
   .location {
