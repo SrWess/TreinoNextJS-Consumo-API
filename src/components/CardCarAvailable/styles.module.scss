@@ -1,0 +1,43 @@
+.cardContainer {
+  background: #ffffff;
+
+  width: 11rem;
+  height: 150px;
+  border-radius: 10px;
+  padding: 0.9rem;
+  margin: 0 auto;
+  cursor: pointer;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+  transition: 0.3s ease;
+  
+  position: relative;
+  left: 0px;
+  bottom: -10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+  .carAvailable {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .previewCar {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+
+  } 
+
+  &:hover {
+    background-color: #CC0000;
+    transform: translateY(-7px);
+
+    .logoCar {
+      filter: invert(100);
+    }
+  }
+}
