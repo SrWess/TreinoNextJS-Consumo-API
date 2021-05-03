@@ -7,6 +7,7 @@ import styles from "./home.module.scss";
 type InfoCar = {
   model: string;
   marketing_name: string;
+  machine_name: string;
   logo_dark: string;
   thumb: string;
 };
@@ -25,18 +26,16 @@ export default function Home({ carsAvailable }: HondaProps) {
       <section className={styles.listCarsContainer}>
         <h2>Carros Disponíveis</h2>
         <div className={styles.listCars}>
-          {
-            carsAvailable.map(car => {
-              return (
-                <CardCarAvailable 
-                  key={car.model}
-                  name={car.marketing_name}
-                  logo={car.logo_dark}
-                  thumb={car.thumb}
-                />
-              )
-            })
-          }
+          {carsAvailable.map((car) => {
+            return (
+              <CardCarAvailable
+                key={car.marketing_name}
+                name={car.machine_name}
+                logo={car.logo_dark}
+                thumb={car.thumb}
+              />
+            );
+          })}
         </div>
       </section>
     </div>
@@ -54,13 +53,14 @@ export const getStaticProps: GetStaticProps = async () => {
   const listCars = detailsCars.map((info: InfoCar) => {
     return {
       model: info.model,
-      nameMarketing: info.marketing_name,
+      marketing_name: info.marketing_name,
+      machine_name: info.machine_name,
       logo_dark: info.logo_dark,
       thumb: info.thumb,
     };
   });
-  
-  const carsAvailable = listCars.filter(car => car.model !== 'Civic Si' )
+
+  const carsAvailable = listCars.filter((car) => car.model !== "Civic Si");
 
   return {
     props: {

@@ -1,13 +1,16 @@
-import styles from './styles.module.scss'
+import Link from "next/link";
+
+import styles from "./styles.module.scss";
 
 export default function CardCarAvailable({ name, thumb, logo }) {
   return (
-    <div className={styles.cardContainer}>
-      <a href="#" className={styles.carAvailable}>
-        <img src={thumb} alt="" className={styles.previewCar}/>
-        <img src={logo} alt="" className={styles.logoCar}/>
-
-      </a>
-    </div>
-  )
+    <Link href={`/automoveis/${name}`}>
+      <div className={styles.cardContainer}>
+        <div className={styles.carAvailable}>
+          <img src={thumb} alt="" className={styles.previewCar} />
+          <img src={logo} alt="" className={styles.logoCar} />
+        </div>
+      </div>
+    </Link>
+  );
 }
