@@ -1,7 +1,8 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
-import CarDetails from "../../components/CarDetails";
+import Head from 'next/head'
 
+import CarDetails from "../../components/CarDetails";
 import SlideCar from "../../components/SlideCar";
 
 import styles from "./automoveis.module.scss";
@@ -26,6 +27,11 @@ type StaticPathsProps = {
 export default function Automoveis({ carDetails }: CarInfoProps) {
   return (
     <main className={styles.automoveisContainer}>
+
+      <Head>
+        <title>Honda Automóveis</title>
+      </Head>
+
       <Link href="/">
         <span className={styles.linkBack}>
           <img src="/arrow-left.svg" alt="" />

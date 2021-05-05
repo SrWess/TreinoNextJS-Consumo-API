@@ -1,9 +1,9 @@
 import styles from './styles.module.scss'
 
-export default function VersionsList() {
+export default function VersionsList({ children }) {
   return (
     <div className={styles.versionsListContainer}>
-      <p>Lista versões disponíveis</p>
+      { children }
     </div>
   );
 }
