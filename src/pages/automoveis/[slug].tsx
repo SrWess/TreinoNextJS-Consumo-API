@@ -1,30 +1,29 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
+import DetailsCar from "../../components/DetailsCar";
 
-import InfoColors from "../../components/InfoColors";
-import InfoPrice from "../../components/InfoPrice";
-import ListVersions from "../../components/ListVersions";
 import SlideCar from "../../components/SlideCar";
 
 import styles from "./automoveis.module.scss";
 
 type InfoCar = {
   model: string;
-  marketing_name: string;
   machine_name: string;
-  logo_dark: string;
+  marketing_name: string;
+  logo: string;
   thumb: string;
+  versions: Array<[]>;
 };
 
 type InfoCarProps = {
-  carSelected: InfoCar;
-}
+  detailsCars: Array<InfoCar>;
+};
 
 type StaticPathsProps = {
   machine_name: string;
 };
 
-export default function Automoveis({ carSelected }: InfoCarProps) {
+export default function Automoveis({ detailsCars }: InfoCarProps) {
   return (
     <main className={styles.automoveisContainer}>
       <Link href="/">
@@ -33,17 +32,15 @@ export default function Automoveis({ carSelected }: InfoCarProps) {
           Voltar
         </span>
       </Link>
-      <div className={styles.wrapper}>
-        <SlideCar 
-          nameCar={carSelected.marketing_name}
-        />
-
-        <section className={styles.detailsCar}>
-          <ListVersions />
-          <InfoColors />
-          <InfoPrice />
-        </section>
-      </div>
+      {detailsCars.map((car) => {
+        return (
+          <div key={car.machine_name} className={styles.wrapper}>
+            <SlideCar nameCar={car.marketing_name} />
+   
+            <DetailsCar/>
+          </div>
+        );
+      })}
     </main>
   );
 }
@@ -78,15 +75,23 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   );
   const data = await res.json();
 
-  const detailsCars = Object.entries(data).map((info) => info[1]);
-
-  const carSelected = detailsCars.find(
-    (car: InfoCar) => car.machine_name === slug
-  );
+  const detailsCars = Object.keys(data)
+    .map((info) => data[info])
+    .filter((carSelected) => carSelected.machine_name === slug)
+    .map((car) => {
+      return {
+        model: car.model,
+        machine_name: car.machine_name,
+        marketing_name: car.marketing_name,
+        logo: car.logo_dark,
+        thumb: car.thumb,
+        versions: car.version_features,
+      };
+    });
 
   return {
     props: {
-      carSelected,
+      detailsCars,
     },
     revalidate: 60 * 60 * 24,
   };
