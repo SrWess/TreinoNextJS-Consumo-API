@@ -1,8 +1,8 @@
 import styles from './styles.module.scss'
 
-export default function InfoColors() {
+export default function ColorsInfo() {
   return (
-    <div className={styles.infoColors}>
+    <div className={styles.colorsInfo}>
       <div className={styles.listColors}>
         <p>Selecione uma versão para ver as cores disponíveis</p>
       </div>

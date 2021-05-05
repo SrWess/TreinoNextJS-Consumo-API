@@ -1,10 +1,10 @@
 import { GetStaticProps } from "next";
 import Head from "next/head";
-import CardCarAvailable from "../components/CardCarAvailable";
+import AvailableCarCard from "../components/AvailableCarCard";
 
 import styles from "./home.module.scss";
 
-type InfoCar = {
+type CarInfo = {
   model: string;
   marketing_name: string;
   machine_name: string;
@@ -13,7 +13,7 @@ type InfoCar = {
 };
 
 type HondaProps = {
-  carsAvailable: InfoCar[];
+  carsAvailable: CarInfo[];
 };
 
 export default function Home({ carsAvailable }: HondaProps) {
@@ -28,7 +28,7 @@ export default function Home({ carsAvailable }: HondaProps) {
         <div className={styles.listCars}>
           {carsAvailable.map((car) => {
             return (
-              <CardCarAvailable
+              <AvailableCarCard
                 key={car.marketing_name}
                 name={car.machine_name}
                 logo={car.logo_dark}
@@ -48,9 +48,9 @@ export const getStaticProps: GetStaticProps = async () => {
   );
   const data = await res.json();
 
-  const detailsCars = Object.entries(data).map((car) => car[1]);
+  const carDetails = Object.entries(data).map((car) => car[1]);
 
-  const listCars = detailsCars.map((info: InfoCar) => {
+  const listCars = carDetails.map((info: CarInfo) => {
     return {
       model: info.model,
       marketing_name: info.marketing_name,

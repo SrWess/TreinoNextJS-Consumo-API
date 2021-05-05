@@ -1,12 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from "next";
 import Link from "next/link";
-import DetailsCar from "../../components/DetailsCar";
+import CarDetails from "../../components/CarDetails";
 
 import SlideCar from "../../components/SlideCar";
 
 import styles from "./automoveis.module.scss";
 
-type InfoCar = {
+type CarInfo = {
   model: string;
   machine_name: string;
   marketing_name: string;
@@ -15,15 +15,15 @@ type InfoCar = {
   versions: Array<[]>;
 };
 
-type InfoCarProps = {
-  detailsCars: Array<InfoCar>;
+type CarInfoProps = {
+  carDetails: Array<CarInfo>;
 };
 
 type StaticPathsProps = {
   machine_name: string;
 };
 
-export default function Automoveis({ detailsCars }: InfoCarProps) {
+export default function Automoveis({ carDetails }: CarInfoProps) {
   return (
     <main className={styles.automoveisContainer}>
       <Link href="/">
@@ -32,12 +32,12 @@ export default function Automoveis({ detailsCars }: InfoCarProps) {
           Voltar
         </span>
       </Link>
-      {detailsCars.map((car) => {
+      {carDetails.map((car) => {
         return (
           <div key={car.machine_name} className={styles.wrapper}>
-            <SlideCar nameCar={car.marketing_name} />
+            <SlideCar carName={car.marketing_name} />
    
-            <DetailsCar/>
+            <CarDetails details={car.versions}/>
           </div>
         );
       })}
@@ -52,9 +52,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const data = await res.json();
 
-  const detailsCars = Object.entries(data).map((car) => car[1]);
+  const carDetails = Object.entries(data).map((car) => car[1]);
 
-  const paths = detailsCars.map((info: StaticPathsProps) => {
+  const paths = carDetails.map((info: StaticPathsProps) => {
     return {
       params: {
         slug: info.machine_name,
@@ -75,7 +75,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   );
   const data = await res.json();
 
-  const detailsCars = Object.keys(data)
+  const carDetails = Object.keys(data)
     .map((info) => data[info])
     .filter((carSelected) => carSelected.machine_name === slug)
     .map((car) => {
@@ -91,7 +91,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 
   return {
     props: {
-      detailsCars,
+      carDetails,
     },
     revalidate: 60 * 60 * 24,
   };

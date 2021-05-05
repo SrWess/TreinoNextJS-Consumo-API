@@ -1,8 +1,8 @@
 import styles from './styles.module.scss'
 
-export default function ListVersions() {
+export default function VersionsList() {
   return (
-    <div className={styles.listCarVersions}>
+    <div className={styles.versionsListContainer}>
       <p>Lista versões disponíveis</p>
     </div>
   );

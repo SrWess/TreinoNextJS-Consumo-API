@@ -19,13 +19,13 @@
   align-items: center;
 
 
-  .carAvailable {
+  .availableCar {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 
-    .previewCar {
+    .carPreview {
       width: 100%;
       margin-bottom: 0.5rem;
     }
@@ -36,7 +36,7 @@
     background-color: #CC0000;
     transform: translateY(-7px);
 
-    .logoCar {
+    .carLogo {
       filter: invert(100);
     }
   }
