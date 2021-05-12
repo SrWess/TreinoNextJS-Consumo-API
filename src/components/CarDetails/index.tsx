@@ -1,15 +1,17 @@
 import { useState } from "react";
 
 import VersionsList from "../VersionsList";
-import ColorsInfo from "../ColorsInfo";
 import PriceInfo from "../PriceInfo";
+import PreviewColor from "../PreviewColor";
 
 import styles from "./styles.module.scss";
 
 export default function CarDetails({ details }) {
   const [selectedVersion, setSelectedVersion] = useState("");
 
-  const versionInfoSelected = details.filter(info => info.version === selectedVersion)  
+  const versionInfoSelected = details.filter(
+    ({ version }) => version === selectedVersion
+  );
 
   const handleSelectedVersion = (e) => {
     e.preventDefault();
@@ -33,9 +35,17 @@ export default function CarDetails({ details }) {
         </ul>
       </VersionsList>
 
-      <ColorsInfo>
-        <p>Colors Info</p>
-      </ColorsInfo>
+      <div className={styles.colorsInfo}>
+        {versionInfoSelected.length ? (
+          versionInfoSelected.map(({ colors }) => {
+            return colors.map(({ name, machine_name, hex }) => {
+              return <PreviewColor key={machine_name} name={name} hex={hex} />;
+            });
+          })
+        ) : (
+          <p>Selecione uma versão para ver as cores disponíveis</p>
+        )}
+      </div>
 
       <PriceInfo />
     </div>
