@@ -38,9 +38,13 @@ export default function CarDetails({ details }) {
       <div className={styles.colorsInfo}>
         {versionInfoSelected.length ? (
           versionInfoSelected.map(({ colors }) => {
-            return colors.map(({ name, machine_name, hex }) => {
-              return <PreviewColor key={machine_name} name={name} hex={hex} />;
-            });
+            return colors
+              .map(({ name, machine_name, hex }) => {
+                return (
+                  <PreviewColor key={machine_name} name={name} hex={hex} />
+                );
+              })
+              .sort(() => 0.5 - Math.random());
           })
         ) : (
           <p>Selecione uma versão para ver as cores disponíveis</p>
