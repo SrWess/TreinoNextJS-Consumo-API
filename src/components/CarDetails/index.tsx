@@ -28,7 +28,7 @@ export default function CarDetails({ details }) {
           {details.map((info) => {
             return (
               <li key={info.version.toLowerCase()}>
-                <a onClick={handleSelectedVersion}>{info.version}</a>
+                <a href="#" onClick={handleSelectedVersion} className={selectedVersion === info.version ? styles.linkActive : ''}>{info.version}</a>
               </li>
             );
           })}

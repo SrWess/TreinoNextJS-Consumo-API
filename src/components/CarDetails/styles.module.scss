@@ -20,12 +20,43 @@
         color: #3f3f3f;
         transition: all 0.3s ease;
         cursor: pointer;
+        position: relative;
+
+        &:after {
+          background: none repeat scroll 0 0 transparent;
+          bottom: -3px;
+          content: "";
+          display: block;
+          height: 3px;
+          left: 50%;
+          position: absolute;
+          background: #cc0000;
+          transition: width 0.3s ease 0s, left 0.3s ease 0s;
+          width: 0;
+        }
 
         &:hover {
           color: #cc0000;
-          border-bottom: 3px solid #cc0000;
           font-weight: bold;
+          &:after {
+            width: 100%;
+            left: 0;
+            background: #cc0000;
+          }
         }
+
+        &.linkActive {
+          color: #cc0000;
+          font-weight: bold;
+          &:after {
+            content: '';
+            width: 100%;
+            height: 3px;
+            background-color: #cc0000;
+            left: 0;
+          }
+        }
+
       }
     }
   }
